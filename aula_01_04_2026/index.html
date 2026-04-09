@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula04</title>
+    <script>
+        let jsonString = `[{"id":"1","name":"Helton"}, {"id":"2","name":"João"}]`;
+
+        try {
+            let users = JSON.parse(jsonString);
+            console.log(JSON.stringify(users));
+            console.log("Usuários:", users);
+        } catch (error) {
+            console.error("Erro ao converter string em objeto:", error);
+        }
+        console.log("Chegou até aqui!");
+
+        try {
+            console.log("Conectando no banco de dados...");
+            /*Código que pode gerar problema*/
+            let jsonString2 = "XPTO";
+            let carro = JSON.parse(jsonString2); // Vai gerar erro
+            console.log("Conexão realizada com sucesso!");
+        } catch (error) {
+            console.error("Falha ao conectar no banco:", error);
+        } finally {
+            console.log("Fechando a conexão com o banco de dados!");
+        }
+
+        function verificaMaiorIdade(idade) {
+            if (idade === undefined) {
+                throw new Error("O parâmetro idade é obrigatório!");
+            }
+
+            if (idade < 0) {
+                throw new Error("A idade não pode ser negativa!");
+            }
+
+            if (idade >= 18) {
+                return "É maior de idade!";
+            } else {
+                return "É menor de idade!";
+            }
+        }
+
+        try {
+            console.log("19:", verificaMaiorIdade(19));
+            console.log("15:", verificaMaiorIdade(15));
+            console.log("Nenhum:", verificaMaiorIdade());
+            console.log("-20:", verificaMaiorIdade(-20));
+        } catch (error) {
+            console.error("Erro ao verificar idade:", error.message);
+            console.log("Chegou ao fim!");
+        }
+
+        function corDaFruta(frutaRecebida) {
+            // Normaliza para minúsculas
+            let fruta = frutaRecebida.toLowerCase();
+
+            switch (fruta) {
+                case "banana":
+                case "maracujá":
+                    console.log("Amarela");
+                    break;
+
+                case "maçã":
+                    console.log("Vermelha");
+                    break;
+
+                default:
+                    console.log("Fruta não encontrada");
+            }
+        }
+
+        // Testes
+        corDaFruta("Maçã");
+        corDaFruta("Banana");
+        corDaFruta("Maracujá");
+        corDaFruta("Uva");
+
+    </script>
+</head>
+
+<body>
+    <h1>Aula #04 - Exceções</h1>
+</body>
+
+</html>
