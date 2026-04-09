@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 05 - Funções</title>
+</head>
+
+<body>
+    <h1>Funções</h1>
+    <script>
+        function cumprimentaHelton(nome = "Não informado", idade = null, cidade = "Londrina") {
+            console.log(`Olá, ${nome} de idade ${idade} ${cidade} anos. Seja bem vindo!`)
+        }
+
+        cumprimentaHelton();
+
+        let recuperaMarca = function (modelo) {
+            if (modelo === "Gol") {
+                return "Volkswagen"
+            } else if (modelo === "Palio") {
+                return "Fiat"
+            } else {
+                return "Não encontrado!"
+            }
+        }
+
+        let retorno = recuperaMarca("Gol");
+        console.log("Retorno: ", retorno);
+
+        //const greet = () => console.log("Hello, arrow function")
+
+        let superHeroi = () => console.log("SpiderMan")
+        superHeroi()
+
+        let superHeroiUP = (nome) => console.log("Super ", nome)
+        superHeroi("Miles Morales")
+
+        let superPoder = () => "invisibilidade"
+        let retornoSP = superPoder();
+        console.log("O super poder é: ", retornoSP)
+
+        let completa = (nome, poder) => `Super Herói: Super-${nome} com o poder: ${poder}`
+        console.log(completa("Juliana", "Boa em PHP"))
+
+        let simplesSimples = aluno => `Bem vindo ${aluno}`
+        console.log(simplesSimples("Alex"))
+
+        let dobrar = n => n * 2
+        console.log(dobrar(10))
+
+        let sabor = fruta => {
+            if (fruta === "Abacaxi") {
+                return "Azedo"
+            } else if (fruta === "Maça") {
+                return "Doce"
+            } else {
+                return "Não encontrado!"
+            }
+        }
+        console.log(sabor("Maça"))
+
+        function imprimeCarnes(...carnes) {
+            function comoimprimeAsCarnes(acumulado, atual) {
+                return `${acumulado} - ${atual}`
+            }
+
+            return carnes.reduce(comoimprimeAsCarnes)
+        }
+
+        console.log(imprimeCarnes("Costela", "Picanha", "Alcatra"))
+
+        let imprimeBebidas = (...bebidas) => bebidas.reduce((anterior, atual) => anterior + " - " + atual, "")
+        console.log(imprimeBebidas("Coca", "Pepsi", "Fanta"))
+    </script>
+</body>
+
+</html>
