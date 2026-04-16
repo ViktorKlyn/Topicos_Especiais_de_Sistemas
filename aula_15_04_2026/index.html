@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 06 - Closures</title>
+    <script>
+        function criarContador() {
+            let contagem = 0
+
+            return function () {
+                contagem += 1
+                console.log(`Valor atual: ${contagem}`)
+            }
+        }
+
+        const meuContador = criarContador()
+
+        meuContador()
+        meuContador()
+        meuContador()
+
+        const meuContador2 = criarContador()
+        meuContador2()
+        meuContador()
+
+        function processaVetor(vet, operacao) {
+            for (let i = 0; i < vet.length; i++) {   // corrigido: vet.length em vez de vet.length()
+                operacao(vet[i])
+            }
+        }
+
+        processaVetor([123, 45.9, 20, 10], console.log)
+
+        function multiplicar(multiplicador) {
+            return function (value) {
+                return value * multiplicador
+            }
+        }
+
+        const dobra = multiplicar(2)
+        const valorDobrado = dobra(100)
+        console.log(`Valor dobrado: ${valorDobrado}`)
+
+        const triplica = multiplicar(3)   // corrigido: declaração antes do uso
+        console.log(`Outro valor triplicado: ${triplica(500)}`) // corrigido: chamada de função, não índice
+        console.log(`Valor triplicado: ${triplica(100)}`)
+
+        function criarCalculadoraDeDesconto(porcentagem) {
+            return function (valorDoProduto) {
+                const desconto = valorDoProduto * (porcentagem / 100)
+                return valorDoProduto - desconto
+            }
+        }
+
+        const descontoFuncionario = criarCalculadoraDeDesconto(30)
+        const descontoClienteVIP = criarCalculadoraDeDesconto(15)
+        const descontoGerente = criarCalculadoraDeDesconto(60)
+
+        let valorTenis = 200
+        console.log(`Tênis (Valor original): ${valorTenis}`)
+        console.log(`Tênis (Funcionário): ${descontoFuncionario(valorTenis)}`)
+        console.log(`Tênis (VIP): ${descontoClienteVIP(valorTenis)}`)
+        console.log(`Tênis (Gerente): ${descontoGerente(valorTenis)}`)
+
+        console.log("========================")
+
+        function executaApenasUmaVez(funcaoCallBack) {
+            let jaFoiexecutada = false
+
+            return function () {
+                if (!jaFoiexecutada) {
+                    jaFoiexecutada = true
+                    funcaoCallBack()
+                } else {
+                    console.log("Ação bloqueada: essa função só pode ser executada uma vez!")
+                }
+            }
+        }
+
+        function cobrarCartao() {
+            console.log("R$ 150,00 debitados no cartão de crédito")
+        }
+
+        const botaoPagar = executaApenasUmaVez(cobrarCartao)
+
+        botaoPagar()
+        botaoPagar() 
+    </script>
+</head>
+
+<body>
+    <h2>Aula #06 - Closures</h2>
+</body>
+
+</html>
